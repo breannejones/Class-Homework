@@ -1,0 +1,1581 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Python introduction exercise (Sept. 11)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## I. Lists\n",
+    "- An ordered collection of Python objects\n",
+    "- Elements inside a list can be edited (added, changed, removed) - mutable.\n",
+    "- Index of each element = [0,1,2,3, ... ] or [ ... ,-4,-3,-2,-1]\n",
+    "  - The first index is zero\n",
+    "  - Alternatively, the last index starts from -1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1. Indexing"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2\n",
+      "9\n",
+      "17\n"
+     ]
+    }
+   ],
+   "source": [
+    "list1 = [2, 5, 7, 9, 10]\n",
+    "print(list1[0])\n",
+    "print(list1[3])\n",
+    "print(list1[2] + list1[-1])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex1) make a list of 3 favorite foods and name the list as 'food_list'_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "food_list = ['pasta', 'cheesecake', 'peanut butter']"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex2) print the second element in the 'food_list'_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "cheesecake\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(food_list[1])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "list2 = [1, 2, 3, ['a', 'b', 'c']]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "temp = list2[3]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['a', 'b', 'c']\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(temp)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'b'"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "temp[1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'b'"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list2[3][1]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex3) The below list 'tennis' includes three tennis players and a (sub) list of their racquet brands in order. <br> Print Roger Federer's racquet brand._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "tennis = ['Rafael Nadal', 'Novak Djokovic', 'Roger Federer', ['Babolat', 'Head', 'Wilson']]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Wilson\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(tennis[-1][-1])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 2. Slicing (start <= x < end) list[start index : end index]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[1, 2]"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list3 = [0, 1, 2, 3, 4]\n",
+    "list3[1:3]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[3]"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list3[3:-1] # Last index is excluded"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[3]"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list3[3:4]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[1, 2, 3, 3, 4, 5, 6]"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list4 = [1, 2, 3]\n",
+    "list5 = [3, 4, 5, 6]\n",
+    "list4 + list5"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex4) The below list 'car' includes four auto makers and customer satisfaction score for each brand in order. <br> Make another list which only includes the four satisfaction scores and name it as 'satisfaction.'_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "car = ['GMC', 'Ford', 'Honda', 'Toyota', 85, 92, 82, 79]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[85, 92, 82, 79]\n"
+     ]
+    }
+   ],
+   "source": [
+    "satisfaction = car[4:8]\n",
+    "# print(satisfaction)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 3. List functions (append, insert, del, remove, sort, reverse, index, pop, len)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[0, 1, 2, 3, 4, 5]"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list5 = [0, 1, 2, 3, 4]\n",
+    "list5.append(5)\n",
+    "list5"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex5) Add another element 6 to the list5 (above)._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0, 1, 2, 3, 4, 5, 6]\n"
+     ]
+    }
+   ],
+   "source": [
+    "list5.append(6)\n",
+    "# print(list5)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[0, 5, 1, 2, 3, 4]"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list5 = [0, 1, 2, 3, 4]\n",
+    "list5.insert(1,5)\n",
+    "list5"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex6) Insert 6 at index 5 of the list5 [0, 5, 1, 2, 3, 4]._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0, 5, 1, 2, 3, 6, 6, 4]\n"
+     ]
+    }
+   ],
+   "source": [
+    "list5.insert(5, 6)\n",
+    "print(list5)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex7) Change the second number in list5 to 7._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0, 7, 1, 2, 3, 6, 6, 4]\n"
+     ]
+    }
+   ],
+   "source": [
+    "list5[1] = 7\n",
+    "print(list5)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex8) In the below code, I wanted to change 2nd and 3rd number both to 7. But I got the following error message. Why do we have this error message? Explain it in a markdown._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "ename": "TypeError",
+     "evalue": "can only assign an iterable",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
+      "Cell \u001b[0;32mIn[21], line 2\u001b[0m\n\u001b[1;32m      1\u001b[0m list6 \u001b[38;5;241m=\u001b[39m [\u001b[38;5;241m0\u001b[39m, \u001b[38;5;241m1\u001b[39m, \u001b[38;5;241m2\u001b[39m, \u001b[38;5;241m3\u001b[39m, \u001b[38;5;241m4\u001b[39m]\n\u001b[0;32m----> 2\u001b[0m list6[\u001b[38;5;241m2\u001b[39m:\u001b[38;5;241m4\u001b[39m] \u001b[38;5;241m=\u001b[39m \u001b[38;5;241m7\u001b[39m\n",
+      "\u001b[0;31mTypeError\u001b[0m: can only assign an iterable"
+     ]
+    }
+   ],
+   "source": [
+    "list6 = [0, 1, 2, 3, 4]\n",
+    "list6[2:4] = 7 # Error message since list6[2:4] is another list, which is different from an elment 7."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "# You can't replace a slice. You have to replace elements one at a time. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex9) How can we solve the problem? If needed, you can get some help from chatgpt._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0, 1, 7, 7, 4]\n"
+     ]
+    }
+   ],
+   "source": [
+    "list6[2] = 7\n",
+    "list6[3] = 7\n",
+    "print(list6)\n",
+    "#Or list6[2:4] = [7]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[9, 77, 13, 51, 100, 3]"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list8 = [9, 77, 13, 51, 100, 3]\n",
+    "list8"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[3, 9, 13, 51, 77, 100]"
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list8.sort()\n",
+    "list8"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[9, 77, 13, 51, 100, 3]"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list9 = [9, 77, 13, 51, 100, 3]\n",
+    "list9"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[3, 100, 51, 13, 77, 9]"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list9.reverse()\n",
+    "list9"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex10) Sort list8 (= [9, 77, 13, 51, 100, 3]) in descending order._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[100, 77, 51, 13, 9, 3]"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list8.sort(reverse=True)\n",
+    "list8"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "2"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list11 = ['a', 'b', 'c', 'd', 'e', 'f']\n",
+    "list11.index('c')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex11) Make a code which generates index for 'e' in list11._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "4"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list11.index('e')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "3"
+      ]
+     },
+     "execution_count": 35,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "list13 = [0, 1, 2]\n",
+    "len(list13)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex12) Make a code which generates the number of elements in list11 (above)._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "6\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(len(list11))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## II. Tuples\n",
+    "- Tuples are used to store multiple items\n",
+    "- Similar to a list, but use round parentheses\n",
+    "- Immutable (read only: add, modify, remove are not possible.)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "tuple"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "t = (5, -3, 'My', 'name', 'is', 'MC')\n",
+    "type(t)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex13) I tried to change the element 'MC' to 'John' in the tuple t. But I got the error message. Why do I get the error message? Explain it in a markdown._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {
+    "scrolled": true,
+    "tags": []
+   },
+   "outputs": [
+    {
+     "ename": "TypeError",
+     "evalue": "'tuple' object does not support item assignment",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[24], line 1\u001b[0m\n\u001b[1;32m----> 1\u001b[0m t[\u001b[38;5;241m5\u001b[39m] \u001b[38;5;241m=\u001b[39m \u001b[38;5;124m'\u001b[39m\u001b[38;5;124mJohn\u001b[39m\u001b[38;5;124m'\u001b[39m\n",
+      "\u001b[1;31mTypeError\u001b[0m: 'tuple' object does not support item assignment"
+     ]
+    }
+   ],
+   "source": [
+    "t[5] = 'John'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Unlike lists, tuples cannot be changed"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1. Tuple indexing [start index : end index] (start <= x < end)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(1, 2)"
+      ]
+     },
+     "execution_count": 37,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "tuple1 = (0, 1, 2, 3, ('a', 'b', 'c'), 5)\n",
+    "tuple1[1:3]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(3, ('a', 'b', 'c'), 5)"
+      ]
+     },
+     "execution_count": 38,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "tuple1[3:]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 2. in & not in - a boolean function"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "str1 = \"Python is the best programming language.\"\n",
+    "\"Python\" in str1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 40,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "\"Python\" not in str1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "list1 = [77, 38, 10]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 42,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "33 in list1"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 43,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "33 not in list1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "tags": []
+   },
+   "source": [
+    "### <font color='red'> _(Ex14) In the tuple1 above (i.e., tuple1 = (0, 1, 2, 3, ('a', 'b', 'c'), 5)), 'c' is an element in the tuple1? Make a code which shows if it is true or false._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "False"
+      ]
+     },
+     "execution_count": 47,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "'c' in tuple1[4]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## III. Loop (iterations) with 'while' or 'for'"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- while : use when the number of iterations is not specified.\n",
+    "- for : use when the number of iterations is specified."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1. Loop with 'while' command"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1\n",
+      "2\n",
+      "3\n"
+     ]
+    }
+   ],
+   "source": [
+    "number = 1\n",
+    "while number <= 3:    # iterate while the condition is true until the condition becomes false.\n",
+    "    print(number)     # Tab or space*4\n",
+    "    number += 1       # identical with 'number = number +1'"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex15) Use 'while' command to print out \"We are learning marketing analytics.\" 13 times._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n",
+      "We are learning marketing analytics.\n"
+     ]
+    }
+   ],
+   "source": [
+    "num = 1\n",
+    "while num <= 13:\n",
+    "    print('We are learning marketing analytics.')\n",
+    "    num+=1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 2.. Loop with 'for' command"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Iterate with each element in (1) string, (2) list, and (3) tuple (the number of iterations is the same with the number of elements)\n",
+    "# for variable in string(or list or tuple):\n",
+    "#    print(variable)          # Tab or space*4"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "hamburger\n",
+      "hot wing\n",
+      "pizza\n"
+     ]
+    }
+   ],
+   "source": [
+    "list_food = ['hamburger', 'hot wing', 'pizza'] # hamburger [0], hot wing [1], pizza [2]\n",
+    "for food in list_food:\n",
+    "    print(food)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "M\n",
+      "K\n",
+      "T\n",
+      "G\n",
+      "6\n",
+      "7\n",
+      "5\n"
+     ]
+    }
+   ],
+   "source": [
+    "course = \"MKTG675\"\n",
+    "for s in course:\n",
+    "    print(s)     # print(s, end=\"\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "MKTG675"
+     ]
+    }
+   ],
+   "source": [
+    "course = \"MKTG675\"\n",
+    "for s in course:\n",
+    "    print(s, end=\"\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 3. Loop with 'for' and 'range'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# range() : function which generates numbers\n",
+    "# range(starting number [default value = 0], ending number, increment [default value = 1])\n",
+    "# range(1,10,1) -> from 1 to 9, increase by 1 => the same with range(1, 10)\n",
+    "# range(0,10,1) -> from 0 to 9, increase by 1 => the same with range(10)\n",
+    "# range(1,100,3) -> from 1 to 99, increase by 3\n",
+    "# range(10,1,-1) -> from 10 to 2, decrease by 1 (increase by -1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1 2 3 4 5 6 7 8 9 "
+     ]
+    }
+   ],
+   "source": [
+    "for i in range(1,10,1):\n",
+    "    print(i, end=\" \")      # default is the same with print(i, end=\"\\n\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "3 4 5 6 7 8 9 "
+     ]
+    }
+   ],
+   "source": [
+    "for i in range(3,10):\n",
+    "    print(i, end=\" \")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex16) Print the integer number from 23 to 40 using for and range._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 "
+     ]
+    }
+   ],
+   "source": [
+    "for num in range(23, 41):\n",
+    "    print(num, end=' ')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[1, 3, 5, 7, 9]"
+      ]
+     },
+     "execution_count": 41,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Create a list of odd numbers between 0 and 10 using range\n",
+    "\n",
+    "[n for n in range(1,11,2)]  # [ ]: list (required)\n",
+    "# range(start,stop,step): start(inclusive), stop(exclusive), step size"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex17) Create a list of exponentiation of odd numbers between 10 and 20 using range._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[121, 169, 225, 289, 361]"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "[n**2 for n in range(11, 21, 2)]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0\n",
+      "5\n",
+      "10\n",
+      "15\n",
+      "20\n",
+      "25\n"
+     ]
+    }
+   ],
+   "source": [
+    "for x in range(30):  # 0~30. range(stop): stop is exclusive. Same as range(0,30)\n",
+    "    if x % 5 == 0:  # '%'(remainder), '/'(division)\n",
+    "        print(x)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex18) Print the numbers from 0 to 30 whose remainder is 0 when it is divided by 3 using range._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "0 3 6 9 12 15 18 21 24 27 30 "
+     ]
+    }
+   ],
+   "source": [
+    "for num in range(0, 31):\n",
+    "    if num%3 == 0:\n",
+    "        print(num, end=' ')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    ">- Q. Create a code which generates times table 2 (i.e., 2 * 1 = 2, 2 * 2 = 4, ....). "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2 * 1 = 2\n",
+      "2 * 2 = 4\n",
+      "2 * 3 = 6\n",
+      "2 * 4 = 8\n",
+      "2 * 5 = 10\n",
+      "2 * 6 = 12\n",
+      "2 * 7 = 14\n",
+      "2 * 8 = 16\n",
+      "2 * 9 = 18\n"
+     ]
+    }
+   ],
+   "source": [
+    "for i in range(1,10):\n",
+    "    print(\"2 * {} = {}\".format(i,2*i))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex19) Print times table of 11 using range._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "11 * 1 = 11\n",
+      "11 * 2 = 22\n",
+      "11 * 3 = 33\n",
+      "11 * 4 = 44\n",
+      "11 * 5 = 55\n",
+      "11 * 6 = 66\n",
+      "11 * 7 = 77\n",
+      "11 * 8 = 88\n",
+      "11 * 9 = 99\n"
+     ]
+    }
+   ],
+   "source": [
+    "for num in range(1, 10):\n",
+    "    print('11 * {} = {}'.format(num, 11*num))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "23"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import random\n",
+    "random.randint(1,50)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "com_num = random.randint(1,50)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Enter your guess number >>  25\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The number is less than 25.\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Enter your guess number >>  10\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The number is less than 10.\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Enter your guess number >>  2\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The number is greater than 2.\n"
+     ]
+    }
+   ],
+   "source": [
+    "while True:\n",
+    "    num = int(input('Enter your guess number >> '))      #int(input(\" \")) allows the user to enter something\n",
+    "    if num < com_num:\n",
+    "        print('The number is greater than {}.'.format(num))\n",
+    "    elif num > com_num:\n",
+    "        print('The number is less than {}.'.format(num))\n",
+    "    else:\n",
+    "        print('Yes, that is correct!')\n",
+    "        break"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

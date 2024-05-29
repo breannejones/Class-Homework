@@ -1,0 +1,2913 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Python introduction exercise (Sept. 18)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## I. Working with data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (1)  Types of Python objects\n",
+    "- Character strings (e.g., 'hello')\n",
+    "- Numbers: Integers (e.g. -10, 0, 200) and floats (real numbers, e.g. 2.78, -12.0)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex1) Import Movie.csv file and name it as \"df\" and display first five observations._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "df = pd.read_csv('Movie.csv')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex2) Display the properties (characteristics) of the variables in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<class 'pandas.core.frame.DataFrame'>\n",
+      "RangeIndex: 561 entries, 0 to 560\n",
+      "Data columns (total 8 columns):\n",
+      " #   Column  Non-Null Count  Dtype  \n",
+      "---  ------  --------------  -----  \n",
+      " 0   title   561 non-null    object \n",
+      " 1   open    561 non-null    object \n",
+      " 2   rev     561 non-null    int64  \n",
+      " 3   budget  561 non-null    int64  \n",
+      " 4   ad      561 non-null    int64  \n",
+      " 5   rating  561 non-null    float64\n",
+      " 6   scrn    561 non-null    int64  \n",
+      " 7   sequel  561 non-null    object \n",
+      "dtypes: float64(1), int64(4), object(3)\n",
+      "memory usage: 35.2+ KB\n"
+     ]
+    }
+   ],
+   "source": [
+    "df.info()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex3) Display the summary statistics (i.e., count, mean, std, min, 25%, 50%, 75%, max) for the numeric variables in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>5.610000e+02</td>\n",
+       "      <td>5.610000e+02</td>\n",
+       "      <td>5.610000e+02</td>\n",
+       "      <td>561.000000</td>\n",
+       "      <td>561.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>7.282073e+07</td>\n",
+       "      <td>5.624742e+07</td>\n",
+       "      <td>2.683935e+07</td>\n",
+       "      <td>6.194831</td>\n",
+       "      <td>988.094474</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>7.634626e+07</td>\n",
+       "      <td>4.847843e+07</td>\n",
+       "      <td>1.314194e+07</td>\n",
+       "      <td>1.215609</td>\n",
+       "      <td>445.389917</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>7.652995e+06</td>\n",
+       "      <td>6.242200e+04</td>\n",
+       "      <td>3.137500e+04</td>\n",
+       "      <td>1.400000</td>\n",
+       "      <td>27.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>2.566093e+07</td>\n",
+       "      <td>2.247191e+07</td>\n",
+       "      <td>1.713572e+07</td>\n",
+       "      <td>5.400000</td>\n",
+       "      <td>705.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>4.904473e+07</td>\n",
+       "      <td>4.112808e+07</td>\n",
+       "      <td>2.594536e+07</td>\n",
+       "      <td>6.300000</td>\n",
+       "      <td>950.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>8.606532e+07</td>\n",
+       "      <td>7.490637e+07</td>\n",
+       "      <td>3.534230e+07</td>\n",
+       "      <td>7.100000</td>\n",
+       "      <td>1233.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>5.361194e+08</td>\n",
+       "      <td>3.075171e+08</td>\n",
+       "      <td>7.470513e+07</td>\n",
+       "      <td>8.800000</td>\n",
+       "      <td>2557.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                rev        budget            ad      rating         scrn\n",
+       "count  5.610000e+02  5.610000e+02  5.610000e+02  561.000000   561.000000\n",
+       "mean   7.282073e+07  5.624742e+07  2.683935e+07    6.194831   988.094474\n",
+       "std    7.634626e+07  4.847843e+07  1.314194e+07    1.215609   445.389917\n",
+       "min    7.652995e+06  6.242200e+04  3.137500e+04    1.400000    27.000000\n",
+       "25%    2.566093e+07  2.247191e+07  1.713572e+07    5.400000   705.000000\n",
+       "50%    4.904473e+07  4.112808e+07  2.594536e+07    6.300000   950.000000\n",
+       "75%    8.606532e+07  7.490637e+07  3.534230e+07    7.100000  1233.000000\n",
+       "max    5.361194e+08  3.075171e+08  7.470513e+07    8.800000  2557.000000"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.describe()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex4) Display all the movie titles in the data \"df.\" In other words, display all the strings in 'title' variable in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array(['13 GOING ON 30', '16 BLOCKS', '2 FAST 2 FURIOUS', '21 GRAMS',\n",
+       "       '28 DAYS LATER', '40 YEAR OLD VIRGIN', '50 FIRST DATES',\n",
+       "       'A CINDERELLA STORY', 'A GUY THING', 'A HISTORY OF VIOLENCE',\n",
+       "       'A LOT LIKE LOVE', 'A MAN APART', 'A MIGHTY WIND',\n",
+       "       'A PRAIRIE HOME COMPANION', 'ACCEPTED', 'AEON FLUX',\n",
+       "       'AFTER THE SUNSET', 'AGENT CODY BANKS', 'AGENT CODY BANKS 2',\n",
+       "       'AKEELAH AND THE BEE', 'ALAMO', 'ALEX AND EMMA', 'ALEXANDER',\n",
+       "       'ALFIE', 'ALIEN VS PREDATOR', 'ALONG CAME POLLY',\n",
+       "       'AMERICAN WEDDING', 'AMITYVILLE HORROR', 'AN AMERICAN HAUNTING',\n",
+       "       'AN INCONVENIENT TRUTH', 'ANACONDAS THE HUNT FOR THE BLOOD ORCHID',\n",
+       "       'ANCHORMAN', 'ANGER MANAGEMENT', 'ANNAPOLIS', 'ANT BULLY',\n",
+       "       'APOCALYPTO', 'AQUAMARINE', 'ARE WE THERE YET',\n",
+       "       'AROUND THE WORLD IN 80 DAYS', 'ARTHUR AND THE INVISIBLES',\n",
+       "       'ASSAULT ON PRECINCT 13', 'ATL', 'AVIATOR', 'BABEL', 'BAD BOYS 2',\n",
+       "       'BAD NEWS BEARS', 'BAD SANTA', 'BARBERSHOP 2', 'BARNYARD', 'BASIC',\n",
+       "       'BATMAN BEGINS', 'BE COOL', 'BECAUSE OF WINN DIXIE', 'BEERFEST',\n",
+       "       'BEING JULIA', 'BENCHWARMERS', 'BEND IT LIKE BECKHAM', 'BEWITCHED',\n",
+       "       'BIG FISH', 'BIG MOMMAS HOUSE 2', 'BIKER BOYZ', 'BLACK CHRISTMAS',\n",
+       "       'BLACK DAHLIA', 'BLADE TRINITY', 'BLOOD DIAMOND', 'BOAT TRIP',\n",
+       "       'BOOGEYMAN', 'BORAT', 'BOURNE SUPREMACY', 'BREAK UP',\n",
+       "       'BREAKIN ALL THE RULES', 'BRIDGET JONES THE EDGE OF REASON',\n",
+       "       'BRINGING DOWN THE HOUSE', 'BROKEBACK MOUNTAIN', 'BROKEN FLOWERS',\n",
+       "       'BROTHERS GRIMM', 'BRUCE ALMIGHTY', 'BULLETPROOF MONK',\n",
+       "       'BUTTERFLY EFFECT', 'CABIN FEVER', 'CALENDAR GIRLS', 'CAPOTE',\n",
+       "       'CARS', 'CASINO ROYALE', 'CAT IN THE HAT', 'CATCH THAT KID',\n",
+       "       'CATWOMAN', 'CAVE', 'CELLULAR',\n",
+       "       'CHARLIE AND THE CHOCOLATE FACTORY',\n",
+       "       'CHARLIES ANGELS FULL THROTTLE', 'CHARLOTTES WEB',\n",
+       "       'CHASING LIBERTY', 'CHASING PAPI', 'CHEAPER BY THE DOZEN',\n",
+       "       'CHEAPER BY THE DOZEN 2', 'CHICKEN LITTLE', 'CHILDREN OF MEN',\n",
+       "       'CHRISTMAS WITH THE KRANKS',\n",
+       "       'CHRONICLES OF NARNIA THE LION THE WITCH AND THE WARDROBE',\n",
+       "       'CHRONICLES OF RIDDICK', 'CINDERELLA MAN', 'CITY OF GOD',\n",
+       "       'CLERKS 2', 'CLICK', 'CLOSER', 'COACH CARTER', 'COLD CREEK MANOR',\n",
+       "       'COLD MOUNTAIN', 'COLLATERAL',\n",
+       "       'CONFESSIONS OF A TEENAGE DRAMA QUEEN', 'CONFIDENCE',\n",
+       "       'CONNIE AND CARLA', 'CONSTANT GARDENER', 'CONSTANTINE', 'COOKOUT',\n",
+       "       'COOLER', 'CORE', 'COVENANT', 'CRADLE 2 THE GRAVE', 'CRANK',\n",
+       "       'CRASH', 'CRY WOLF', 'CURIOUS GEORGE', 'CURSED', 'DA VINCI CODE',\n",
+       "       'DADDY DAY CARE', 'DAREDEVIL', 'DARK BLUE', 'DARK WATER',\n",
+       "       'DARKNESS', 'DARKNESS FALLS', 'DATE MOVIE',\n",
+       "       'DAVE CHAPPELLES BLOCK PARTY', 'DAWN OF THE DEAD',\n",
+       "       'DAY AFTER TOMORROW', 'DE LOVELY', 'DECK THE HALLS', 'DEJA VU',\n",
+       "       'DEPARTED', 'DERAILED', 'DESCENT', 'DEUCE BIGALOW EUROPEAN GIGOLO',\n",
+       "       'DEVIL WEARS PRADA', 'DEVILS REJECTS',\n",
+       "       'DIARY OF A MAD BLACK WOMAN', 'DICKIE ROBERTS FORMER CHILD STAR',\n",
+       "       'DIRTY DANCING HAVANA NIGHTS', 'DIRTY PRETTY THINGS',\n",
+       "       'DODGEBALL A TRUE UNDERDOG STORY', 'DOMINO', 'DOOM',\n",
+       "       'DOWN WITH LOVE', 'DREAMCATCHER',\n",
+       "       'DREAMER INSPIRED BY A TRUE STORY', 'DREAMGIRLS',\n",
+       "       'DUKES OF HAZZARD', 'DUMB AND DUMBERER WHEN HARRY MET LLOYD',\n",
+       "       'DUPLEX', 'EIGHT BELOW', 'ELEKTRA', 'ELF', 'ELIZABETHTOWN',\n",
+       "       'ELLA ENCHANTED', 'EMPLOYEE OF THE MONTH', 'END OF THE SPEAR',\n",
+       "       'ENVY', 'ERAGON', 'ETERNAL SUNSHINE OF THE SPOTLESS MIND',\n",
+       "       'EUROTRIP', 'EXORCISM OF EMILY ROSE', 'EXORCIST THE BEGINNING',\n",
+       "       'FAHRENHEIT 9 11', 'FAILURE TO LAUNCH', 'FAMILY STONE',\n",
+       "       'FANTASTIC FOUR', 'FAST AND THE FURIOUS TOKYO DRIFT', 'FAT ALBERT',\n",
+       "       'FEVER PITCH', 'FIGHTING TEMPTATIONS', 'FINAL DESTINATION 2',\n",
+       "       'FINAL DESTINATION 3', 'FINDING NEMO', 'FINDING NEVERLAND',\n",
+       "       'FIREWALL', 'FIRST DAUGHTER', 'FLAGS OF OUR FATHERS', 'FLICKA',\n",
+       "       'FLIGHT OF THE PHOENIX', 'FLIGHTPLAN', 'FLUSHED AWAY', 'FLYBOYS',\n",
+       "       'FOG', 'FORGOTTEN', 'FOUR BROTHERS', 'FREAKY FRIDAY',\n",
+       "       'FREDDY VS JASON', 'FREEDOMLAND', 'FRIDAY NIGHT LIGHTS',\n",
+       "       'FRIENDS WITH MONEY', 'FUN WITH DICK AND JANE', 'GARDEN STATE',\n",
+       "       'GARFIELD', 'GARFIELD A TAIL OF TWO KITTIES',\n",
+       "       'GEORGE A ROMEROS LAND OF THE DEAD', 'GET RICH OR DIE TRYIN',\n",
+       "       'GIRL NEXT DOOR', 'GIRL WITH A PEARL EARRING', 'GODS AND GENERALS',\n",
+       "       'GODSEND', 'GOOD BOY', 'GOOD NIGHT AND GOOD LUCK', 'GOOD SHEPHERD',\n",
+       "       'GOSPEL', 'GOTHIKA', 'GREAT RAID', 'GREATEST GAME EVER PLAYED',\n",
+       "       'GRIDIRON GANG', 'GRUDGE', 'GRUDGE 2', 'GUARDIAN', 'GUESS WHO',\n",
+       "       'HAPPY FEET', 'HAROLD AND KUMAR GO TO WHITE CASTLE',\n",
+       "       'HARRY POTTER AND THE GOBLET OF FIRE',\n",
+       "       'HARRY POTTER AND THE PRISONER OF AZKABAN', 'HAUNTED MANSION',\n",
+       "       'HEAD OF STATE', 'HELLBOY', 'HERBIE FULLY LOADED', 'HERO',\n",
+       "       'HIDALGO', 'HIDE AND SEEK', 'HILLS HAVE EYES', 'HITCH',\n",
+       "       'HITCHHIKERS GUIDE TO THE GALAXY', 'HOLES', 'HOLIDAY',\n",
+       "       'HOLLYWOOD HOMICIDE', 'HOLLYWOODLAND', 'HOME ON THE RANGE',\n",
+       "       'HONEY', 'HONEYMOONERS', 'HOODWINKED', 'HOSTAGE', 'HOSTEL',\n",
+       "       'HOTEL RWANDA', 'HOUSE OF 1000 CORPSES', 'HOUSE OF FLYING DAGGERS',\n",
+       "       'HOUSE OF SAND AND FOG', 'HOUSE OF THE DEAD', 'HOUSE OF WAX',\n",
+       "       'HOW TO DEAL', 'HOW TO LOSE A GUY IN 10 DAYS', 'HULK', 'HUNTED',\n",
+       "       'HUSTLE AND FLOW', 'I HEART HUCKABEES', 'I ROBOT', 'ICE AGE',\n",
+       "       'ICE HARVEST', 'ICE PRINCESS', 'IDENTITY', 'IDLEWILD',\n",
+       "       'ILLUSIONIST', 'IN GOOD COMPANY', 'IN HER SHOES', 'IN LAWS',\n",
+       "       'INCREDIBLES', 'INSIDE MAN', 'INTERPRETER', 'INTO THE BLUE',\n",
+       "       'INTOLERABLE CRUELTY', 'INVINCIBLE', 'ISLAND', 'ITALIAN JOB',\n",
+       "       'JACKASS NUMBER TWO', 'JARHEAD', 'JEEPERS CREEPERS 2',\n",
+       "       'JERSEY GIRL', 'JET LIS FEARLESS', 'JOHN TUCKER MUST DIE',\n",
+       "       'JOHNNY ENGLISH', 'JOHNSON FAMILY VACATION', 'JUNGLE BOOK 2',\n",
+       "       'JUST LIKE HEAVEN', 'JUST MARRIED', 'JUST MY LUCK',\n",
+       "       'KANGAROO JACK', 'KICKING AND SCREAMING', 'KILL BILL VOL 1',\n",
+       "       'KILL BILL VOL 2', 'KING ARTHUR', 'KING KONG', 'KINGDOM OF HEAVEN',\n",
+       "       'KINSEY', 'KUNG FU HUSTLE', 'LADDER 49', 'LADY IN THE WATER',\n",
+       "       'LADYKILLERS', 'LAKE HOUSE', 'LARA CROFT TOMB RAIDER',\n",
+       "       'LARRY THE CABLE GUY HEALTH INSPECTOR', 'LAST HOLIDAY',\n",
+       "       'LAST KING OF SCOTLAND', 'LAST SAMURAI', 'LAWS OF ATTRACTION',\n",
+       "       'LEAGUE OF EXTRAORDINARY GENTLEMEN', 'LEGALLY BLONDE 2',\n",
+       "       'LEGEND OF ZORRO',\n",
+       "       'LEMONY SNICKETS A SERIES OF UNFORTUNATE EVENTS',\n",
+       "       'LETTERS FROM IWO JIMA', 'LIFE AQUATIC WITH STEVE ZISSOU',\n",
+       "       'LIFE OF DAVID GALE', 'LITTLE BLACK BOOK', 'LITTLE MAN',\n",
+       "       'LITTLE MISS SUNSHINE', 'LIZZIE MCGUIRE MOVIE', 'LONGEST YARD',\n",
+       "       'LOONEY TUNES BACK IN ACTION',\n",
+       "       'LORD OF THE RINGS THE RETURN OF THE KING', 'LORD OF WAR',\n",
+       "       'LORDS OF DOGTOWN', 'LOST IN TRANSLATION', 'LOVE ACTUALLY',\n",
+       "       'LUCKY NUMBER SLEVIN', 'MADAGASCAR', 'MALIBUS MOST WANTED',\n",
+       "       'MAN OF THE HOUSE', 'MAN OF THE YEAR', 'MAN ON FIRE',\n",
+       "       'MANCHURIAN CANDIDATE', 'MARCH OF THE PENGUINS',\n",
+       "       'MARIE ANTOINETTE', 'MARINE',\n",
+       "       'MASTER AND COMMANDER THE FAR SIDE OF THE WORLD', 'MATADOR',\n",
+       "       'MATCH POINT', 'MATRIX RELOADED', 'MATRIX REVOLUTIONS',\n",
+       "       'MEAN GIRLS', 'MEDALLION', 'MEET THE FOCKERS',\n",
+       "       'MEMOIRS OF A GEISHA', 'MIAMI VICE', 'MILLION DOLLAR BABY',\n",
+       "       'MIRACLE', 'MISS CONGENIALITY 2', 'MISSING',\n",
+       "       'MISSION IMPOSSIBLE 3', 'MONA LISA SMILE', 'MONSTER',\n",
+       "       'MONSTER HOUSE', 'MONSTER IN LAW', 'MR 3000', 'MR AND MRS SMITH',\n",
+       "       'MUNICH', 'MUST LOVE DOGS', 'MY BABYS DADDY', 'MY BOSSS DAUGHTER',\n",
+       "       'MY SUPER EX GIRLFRIEND', 'MYSTIC RIVER', 'NACHO LIBRE',\n",
+       "       'NANNY MCPHEE', 'NAPOLEON DYNAMITE', 'NATIONAL TREASURE',\n",
+       "       'NATIVITY STORY', 'NEW WORLD', 'NEW YORK MINUTE',\n",
+       "       'NIGHT AT THE MUSEUM', 'NORTH COUNTRY', 'NOTEBOOK',\n",
+       "       'NOTES ON A SCANDAL', 'NOWHERE IN AFRICA', 'OCEANS TWELVE',\n",
+       "       'OLD SCHOOL', 'OMEN', 'ONCE UPON A TIME IN MEXICO',\n",
+       "       'ONE NIGHT WITH THE KING', 'OPEN RANGE', 'OPEN SEASON',\n",
+       "       'OPEN WATER', 'OUT OF TIME', 'OVER THE HEDGE', 'PACIFIER',\n",
+       "       'PANS LABYRINTH', 'PAPARAZZI', 'PASSION OF THE CHRIST', 'PAYCHECK',\n",
+       "       'PERFECT MAN', 'PERFECT SCORE', 'PETER PAN',\n",
+       "       'PHANTOM OF THE OPERA', 'PHONE BOOTH', 'PINK PANTHER',\n",
+       "       'PIRATES OF THE CARIBBEAN',\n",
+       "       'PIRATES OF THE CARIBBEAN DEAD MANS CHEST', 'POLAR EXPRESS',\n",
+       "       'POOHS HEFFALUMP MOVIE', 'POSEIDON', 'PRESTIGE',\n",
+       "       'PRIDE AND PREJUDICE', 'PRIME', 'PRINCE AND ME',\n",
+       "       'PRINCESS DIARIES 2', 'PRODUCERS', 'PROTECTOR', 'PULSE',\n",
+       "       'PUNISHER', 'PURSUIT OF HAPPYNESS', 'QUEEN', 'RACING STRIPES',\n",
+       "       'RADIO', 'RAISE YOUR VOICE', 'RAISING HELEN', 'RAY', 'REBOUND',\n",
+       "       'RED EYE', 'RENT', 'RESIDENT EVIL APOCALYPSE', 'RING TWO',\n",
+       "       'ROBOTS', 'ROCKY BALBOA', 'ROLL BOUNCE', 'RUGRATS GO WILD',\n",
+       "       'RUNAWAY JURY', 'RUNDOWN', 'RV', 'SAHARA',\n",
+       "       'SANTA CLAUSE 3 THE ESCAPE CLAUSE', 'SAVED', 'SAW', 'SAW 2',\n",
+       "       'SAW 3', 'SCARY MOVIE 3', 'SCARY MOVIE 4', 'SCHOOL FOR SCOUNDRELS',\n",
+       "       'SCHOOL OF ROCK', 'SCOOBY DOO 2 MONSTERS UNLEASHED', 'SEABISCUIT',\n",
+       "       'SECONDHAND LIONS', 'SECRET WINDOW', 'SEE NO EVIL',\n",
+       "       'SEED OF CHUCKY', 'SENTINEL', 'SERENITY', 'SHAGGY DOG',\n",
+       "       'SHALL WE DANCE', 'SHANGHAI KNIGHTS', 'SHARK TALE',\n",
+       "       'SHAUN OF THE DEAD', 'SHES THE MAN', 'SHREK 2', 'SIDEWAYS',\n",
+       "       'SILENT HILL', 'SIN CITY', 'SINBAD LEGEND OF THE SEVEN SEAS',\n",
+       "       'SISTERHOOD OF THE TRAVELING PANTS', 'SKELETON KEY',\n",
+       "       'SKY CAPTAIN AND THE WORLD OF TOMORROW', 'SKY HIGH', 'SLEEPOVER',\n",
+       "       'SNAKES ON A PLANE', 'SOMETHINGS GOTTA GIVE', 'SON OF THE MASK',\n",
+       "       'SOUL PLANE', 'SPANGLISH', 'SPIDER MAN 2',\n",
+       "       'SPONGEBOB SQUAREPANTS MOVIE', 'STAR WARS EPISODE 3',\n",
+       "       'STARSKY AND HUTCH', 'STAY ALIVE', 'STEALTH', 'STEP UP',\n",
+       "       'STEPFORD WIVES', 'STICK IT', 'STRANGER THAN FICTION',\n",
+       "       'STUCK ON YOU', 'SUPER BABIES', 'SUPER SIZE ME',\n",
+       "       'SUPERMAN RETURNS', 'SUSPECT ZERO', 'SWAT', 'SWIMMING POOL',\n",
+       "       'SYRIANA', 'TAKE THE LEAD', 'TAKING LIVES', 'TALLADEGA NIGHTS',\n",
+       "       'TAXI', 'TEAM AMERICA', 'TEARS OF THE SUN', 'TERMINAL',\n",
+       "       'TERMINATOR 3 RISE OF THE MACHINES', 'TEXAS CHAINSAW MASSACRE',\n",
+       "       'TEXAS CHAINSAW MASSACRE THE BEGINNING', 'THANK YOU FOR SMOKING',\n",
+       "       'TIM BURTONS CORPSE BRIDE', 'TIMELINE', 'TORQUE', 'TRANSAMERICA',\n",
+       "       'TRANSPORTER 2', 'TRIPLETS OF BELLEVILLE', 'TRISTAN AND ISOLDE',\n",
+       "       'TROY', 'TUPAC RESURRECTION', 'TWISTED', 'TWO BROTHERS',\n",
+       "       'TWO FOR THE MONEY', 'TYLER PERRYS MADEAS FAMILY REUNION',\n",
+       "       'ULTRAVIOLET', 'UNACCOMPANIED MINORS', 'UNDER THE TUSCAN SUN',\n",
+       "       'UNDERWORLD', 'UNDERWORLD EVOLUTION', 'UNITED 93', 'UNLEASHED',\n",
+       "       'UPSIDE OF ANGER', 'UPTOWN GIRLS', 'V FOR VENDETTA', 'VALIANT',\n",
+       "       'VAN HELSING', 'VANITY FAIR', 'VIEW FROM THE TOP', 'VILLAGE',\n",
+       "       'VOLVER', 'WAITING', 'WALK THE LINE', 'WALKING TALL',\n",
+       "       'WALLACE AND GROMIT THE CURSE OF THE WERE RABBIT',\n",
+       "       'WAR OF THE WORLDS', 'WE ARE MARSHALL', 'WEATHER MAN',\n",
+       "       'WEDDING CRASHERS', 'WEDDING DATE', 'WELCOME TO MOOSEPORT',\n",
+       "       'WHALE RIDER', 'WHAT A GIRL WANTS', 'WHEN A STRANGER CALLS',\n",
+       "       'WHITE CHICKS', 'WHITE NOISE', 'WHOLE TEN YARDS', 'WICKER MAN',\n",
+       "       'WICKER PARK', 'WILD', 'WILLARD', 'WIMBLEDON',\n",
+       "       'WIN A DATE WITH TAD HAMILTON', 'WINGED MIGRATION',\n",
+       "       'WITHOUT A PADDLE', 'WOLF CREEK', 'WORLD TRADE CENTER',\n",
+       "       'WRONG TURN', 'X MEN THE LAST STAND', 'X2 X MEN UNITED',\n",
+       "       'XXX STATE OF THE UNION', 'YOU GOT SERVED', 'YOU ME AND DUPREE',\n",
+       "       'YOURS MINE AND OURS', 'YU GI OH THE MOVIE', 'ZATHURA', 'ZOOM'],\n",
+       "      dtype=object)"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['title'].unique()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex5) Display the strings for the 'sequel' variable in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "NoSeq    508\n",
+       "Seq       53\n",
+       "Name: sequel, dtype: int64"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.loc[df['sequel'] == 'Seq']\n",
+    "df['sequel'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex6) How many observations are categorized as no sequel movies (i.e., what is the number of observations with \"NoSeq\" in 'sequel' variable)?_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "508"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['sequel'].value_counts()['NoSeq']"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (2) Select observations"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### (2)-1 Index-based selection of observations"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex7) Display from the 2nd to the 12th observation in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>16 BLOCKS</td>\n",
+       "      <td>3/3/2006</td>\n",
+       "      <td>42021800</td>\n",
+       "      <td>51252848</td>\n",
+       "      <td>30141800</td>\n",
+       "      <td>6.7</td>\n",
+       "      <td>1042</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2 FAST 2 FURIOUS</td>\n",
+       "      <td>6/6/2003</td>\n",
+       "      <td>158745200</td>\n",
+       "      <td>94881400</td>\n",
+       "      <td>47201120</td>\n",
+       "      <td>5.0</td>\n",
+       "      <td>1073</td>\n",
+       "      <td>Seq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>21 GRAMS</td>\n",
+       "      <td>11/21/2003</td>\n",
+       "      <td>20337672</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>12344444</td>\n",
+       "      <td>7.9</td>\n",
+       "      <td>193</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28 DAYS LATER</td>\n",
+       "      <td>6/27/2003</td>\n",
+       "      <td>56260816</td>\n",
+       "      <td>9987516</td>\n",
+       "      <td>13260048</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>521</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>40 YEAR OLD VIRGIN</td>\n",
+       "      <td>8/19/2005</td>\n",
+       "      <td>128612496</td>\n",
+       "      <td>30552292</td>\n",
+       "      <td>34547592</td>\n",
+       "      <td>7.5</td>\n",
+       "      <td>1375</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>50 FIRST DATES</td>\n",
+       "      <td>2/13/2004</td>\n",
+       "      <td>146911392</td>\n",
+       "      <td>91130016</td>\n",
+       "      <td>41600756</td>\n",
+       "      <td>6.8</td>\n",
+       "      <td>1140</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>A CINDERELLA STORY</td>\n",
+       "      <td>7/16/2004</td>\n",
+       "      <td>62500820</td>\n",
+       "      <td>23086270</td>\n",
+       "      <td>26213366</td>\n",
+       "      <td>5.4</td>\n",
+       "      <td>925</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>A GUY THING</td>\n",
+       "      <td>1/17/2003</td>\n",
+       "      <td>19407530</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>15300874</td>\n",
+       "      <td>5.5</td>\n",
+       "      <td>682</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>A HISTORY OF VIOLENCE</td>\n",
+       "      <td>9/23/2005</td>\n",
+       "      <td>37020720</td>\n",
+       "      <td>37602820</td>\n",
+       "      <td>24147354</td>\n",
+       "      <td>7.5</td>\n",
+       "      <td>411</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>10</th>\n",
+       "      <td>A LOT LIKE LOVE</td>\n",
+       "      <td>4/22/2005</td>\n",
+       "      <td>25670646</td>\n",
+       "      <td>35252644</td>\n",
+       "      <td>21556168</td>\n",
+       "      <td>6.4</td>\n",
+       "      <td>867</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>11</th>\n",
+       "      <td>A MAN APART</td>\n",
+       "      <td>4/4/2003</td>\n",
+       "      <td>33378400</td>\n",
+       "      <td>44943820</td>\n",
+       "      <td>20019476</td>\n",
+       "      <td>5.7</td>\n",
+       "      <td>847</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>12</th>\n",
+       "      <td>A MIGHTY WIND</td>\n",
+       "      <td>4/16/2003</td>\n",
+       "      <td>22198510</td>\n",
+       "      <td>7490637</td>\n",
+       "      <td>22812610</td>\n",
+       "      <td>7.1</td>\n",
+       "      <td>243</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                    title        open        rev    budget        ad  rating  \\\n",
+       "1               16 BLOCKS    3/3/2006   42021800  51252848  30141800     6.7   \n",
+       "2        2 FAST 2 FURIOUS    6/6/2003  158745200  94881400  47201120     5.0   \n",
+       "3                21 GRAMS  11/21/2003   20337672  24968790  12344444     7.9   \n",
+       "4           28 DAYS LATER   6/27/2003   56260816   9987516  13260048     7.6   \n",
+       "5      40 YEAR OLD VIRGIN   8/19/2005  128612496  30552292  34547592     7.5   \n",
+       "6          50 FIRST DATES   2/13/2004  146911392  91130016  41600756     6.8   \n",
+       "7      A CINDERELLA STORY   7/16/2004   62500820  23086270  26213366     5.4   \n",
+       "8             A GUY THING   1/17/2003   19407530  24968790  15300874     5.5   \n",
+       "9   A HISTORY OF VIOLENCE   9/23/2005   37020720  37602820  24147354     7.5   \n",
+       "10        A LOT LIKE LOVE   4/22/2005   25670646  35252644  21556168     6.4   \n",
+       "11            A MAN APART    4/4/2003   33378400  44943820  20019476     5.7   \n",
+       "12          A MIGHTY WIND   4/16/2003   22198510   7490637  22812610     7.1   \n",
+       "\n",
+       "    scrn sequel  \n",
+       "1   1042  NoSeq  \n",
+       "2   1073    Seq  \n",
+       "3    193  NoSeq  \n",
+       "4    521  NoSeq  \n",
+       "5   1375  NoSeq  \n",
+       "6   1140  NoSeq  \n",
+       "7    925  NoSeq  \n",
+       "8    682  NoSeq  \n",
+       "9    411  NoSeq  \n",
+       "10   867  NoSeq  \n",
+       "11   847  NoSeq  \n",
+       "12   243  NoSeq  "
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.iloc[1:13]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex7) Select the last five observations only for the variables 'title' and 'rev' in \"df\", and create a new dataframe for the selected dataset and name it as \"df_temp1.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>rev</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>556</th>\n",
+       "      <td>YOU ME AND DUPREE</td>\n",
+       "      <td>86136800</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>557</th>\n",
+       "      <td>YOURS MINE AND OURS</td>\n",
+       "      <td>62764820</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>558</th>\n",
+       "      <td>YU GI OH THE MOVIE</td>\n",
+       "      <td>24016850</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>559</th>\n",
+       "      <td>ZATHURA</td>\n",
+       "      <td>34381748</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>560</th>\n",
+       "      <td>ZOOM</td>\n",
+       "      <td>13655271</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                   title       rev\n",
+       "556    YOU ME AND DUPREE  86136800\n",
+       "557  YOURS MINE AND OURS  62764820\n",
+       "558   YU GI OH THE MOVIE  24016850\n",
+       "559              ZATHURA  34381748\n",
+       "560                 ZOOM  13655271"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df_temp1 = df.iloc[-5:, 0:3].drop(columns = ['open'])\n",
+    "# or\n",
+    "df.iloc[-5:][['title', 'rev']]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex8) Transpose \"df_temp1.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>556</th>\n",
+       "      <th>557</th>\n",
+       "      <th>558</th>\n",
+       "      <th>559</th>\n",
+       "      <th>560</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>title</th>\n",
+       "      <td>YOU ME AND DUPREE</td>\n",
+       "      <td>YOURS MINE AND OURS</td>\n",
+       "      <td>YU GI OH THE MOVIE</td>\n",
+       "      <td>ZATHURA</td>\n",
+       "      <td>ZOOM</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>rev</th>\n",
+       "      <td>86136800</td>\n",
+       "      <td>62764820</td>\n",
+       "      <td>24016850</td>\n",
+       "      <td>34381748</td>\n",
+       "      <td>13655271</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                     556                  557                 558       559  \\\n",
+       "title  YOU ME AND DUPREE  YOURS MINE AND OURS  YU GI OH THE MOVIE   ZATHURA   \n",
+       "rev             86136800             62764820            24016850  34381748   \n",
+       "\n",
+       "            560  \n",
+       "title      ZOOM  \n",
+       "rev    13655271  "
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df_temp1.transpose()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### (2)-2 Selection of observations with a particular number of character"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex9) Create a subsample with observations whose movie rating is 7 or higher ('rating'=7 or above 7) and name the subsample (i.e., the dataframe) as \"high_rating_movies.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>21 GRAMS</td>\n",
+       "      <td>11/21/2003</td>\n",
+       "      <td>20337672</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>12344444</td>\n",
+       "      <td>7.9</td>\n",
+       "      <td>193</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28 DAYS LATER</td>\n",
+       "      <td>6/27/2003</td>\n",
+       "      <td>56260816</td>\n",
+       "      <td>9987516</td>\n",
+       "      <td>13260048</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>521</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>40 YEAR OLD VIRGIN</td>\n",
+       "      <td>8/19/2005</td>\n",
+       "      <td>128612496</td>\n",
+       "      <td>30552292</td>\n",
+       "      <td>34547592</td>\n",
+       "      <td>7.5</td>\n",
+       "      <td>1375</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>A HISTORY OF VIOLENCE</td>\n",
+       "      <td>9/23/2005</td>\n",
+       "      <td>37020720</td>\n",
+       "      <td>37602820</td>\n",
+       "      <td>24147354</td>\n",
+       "      <td>7.5</td>\n",
+       "      <td>411</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>12</th>\n",
+       "      <td>A MIGHTY WIND</td>\n",
+       "      <td>4/16/2003</td>\n",
+       "      <td>22198510</td>\n",
+       "      <td>7490637</td>\n",
+       "      <td>22812610</td>\n",
+       "      <td>7.1</td>\n",
+       "      <td>243</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                    title        open        rev    budget        ad  rating  \\\n",
+       "3                21 GRAMS  11/21/2003   20337672  24968790  12344444     7.9   \n",
+       "4           28 DAYS LATER   6/27/2003   56260816   9987516  13260048     7.6   \n",
+       "5      40 YEAR OLD VIRGIN   8/19/2005  128612496  30552292  34547592     7.5   \n",
+       "9   A HISTORY OF VIOLENCE   9/23/2005   37020720  37602820  24147354     7.5   \n",
+       "12          A MIGHTY WIND   4/16/2003   22198510   7490637  22812610     7.1   \n",
+       "\n",
+       "    scrn sequel  \n",
+       "3    193  NoSeq  \n",
+       "4    521  NoSeq  \n",
+       "5   1375  NoSeq  \n",
+       "9    411  NoSeq  \n",
+       "12   243  NoSeq  "
+      ]
+     },
+     "execution_count": 41,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "high_rating_movies = df[df.rating >= 7]\n",
+    "high_rating_movies.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (3)  Crete a new variable"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex10) Create a new variable named as 'avg_rev' which indicates revenue per screen (i.e., rev/scrn) in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>avg_rev</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>13 GOING ON 30</td>\n",
+       "      <td>4/23/2004</td>\n",
+       "      <td>69540400</td>\n",
+       "      <td>44957472</td>\n",
+       "      <td>36712516</td>\n",
+       "      <td>6.1</td>\n",
+       "      <td>1229</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>56582.912937</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>16 BLOCKS</td>\n",
+       "      <td>3/3/2006</td>\n",
+       "      <td>42021800</td>\n",
+       "      <td>51252848</td>\n",
+       "      <td>30141800</td>\n",
+       "      <td>6.7</td>\n",
+       "      <td>1042</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>40328.023033</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2 FAST 2 FURIOUS</td>\n",
+       "      <td>6/6/2003</td>\n",
+       "      <td>158745200</td>\n",
+       "      <td>94881400</td>\n",
+       "      <td>47201120</td>\n",
+       "      <td>5.0</td>\n",
+       "      <td>1073</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>147945.200373</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>21 GRAMS</td>\n",
+       "      <td>11/21/2003</td>\n",
+       "      <td>20337672</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>12344444</td>\n",
+       "      <td>7.9</td>\n",
+       "      <td>193</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>105376.538860</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28 DAYS LATER</td>\n",
+       "      <td>6/27/2003</td>\n",
+       "      <td>56260816</td>\n",
+       "      <td>9987516</td>\n",
+       "      <td>13260048</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>521</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>107986.211132</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "              title        open        rev    budget        ad  rating  scrn  \\\n",
+       "0    13 GOING ON 30   4/23/2004   69540400  44957472  36712516     6.1  1229   \n",
+       "1         16 BLOCKS    3/3/2006   42021800  51252848  30141800     6.7  1042   \n",
+       "2  2 FAST 2 FURIOUS    6/6/2003  158745200  94881400  47201120     5.0  1073   \n",
+       "3          21 GRAMS  11/21/2003   20337672  24968790  12344444     7.9   193   \n",
+       "4     28 DAYS LATER   6/27/2003   56260816   9987516  13260048     7.6   521   \n",
+       "\n",
+       "  sequel        avg_rev  \n",
+       "0  NoSeq   56582.912937  \n",
+       "1  NoSeq   40328.023033  \n",
+       "2    Seq  147945.200373  \n",
+       "3  NoSeq  105376.538860  \n",
+       "4  NoSeq  107986.211132  "
+      ]
+     },
+     "execution_count": 42,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['avg_rev'] = df.rev/df.scrn\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (4) Create a log variable"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex11) Create a new variable named as \"ln_budget\" which is the natural log of budget in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>avg_rev</th>\n",
+       "      <th>ln_budget</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>13 GOING ON 30</td>\n",
+       "      <td>4/23/2004</td>\n",
+       "      <td>69540400</td>\n",
+       "      <td>44957472</td>\n",
+       "      <td>36712516</td>\n",
+       "      <td>6.1</td>\n",
+       "      <td>1229</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>56582.912937</td>\n",
+       "      <td>17.621228</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>16 BLOCKS</td>\n",
+       "      <td>3/3/2006</td>\n",
+       "      <td>42021800</td>\n",
+       "      <td>51252848</td>\n",
+       "      <td>30141800</td>\n",
+       "      <td>6.7</td>\n",
+       "      <td>1042</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>40328.023033</td>\n",
+       "      <td>17.752282</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2 FAST 2 FURIOUS</td>\n",
+       "      <td>6/6/2003</td>\n",
+       "      <td>158745200</td>\n",
+       "      <td>94881400</td>\n",
+       "      <td>47201120</td>\n",
+       "      <td>5.0</td>\n",
+       "      <td>1073</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>147945.200373</td>\n",
+       "      <td>18.368138</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>21 GRAMS</td>\n",
+       "      <td>11/21/2003</td>\n",
+       "      <td>20337672</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>12344444</td>\n",
+       "      <td>7.9</td>\n",
+       "      <td>193</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>105376.538860</td>\n",
+       "      <td>17.033137</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28 DAYS LATER</td>\n",
+       "      <td>6/27/2003</td>\n",
+       "      <td>56260816</td>\n",
+       "      <td>9987516</td>\n",
+       "      <td>13260048</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>521</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>107986.211132</td>\n",
+       "      <td>16.116846</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "              title        open        rev    budget        ad  rating  scrn  \\\n",
+       "0    13 GOING ON 30   4/23/2004   69540400  44957472  36712516     6.1  1229   \n",
+       "1         16 BLOCKS    3/3/2006   42021800  51252848  30141800     6.7  1042   \n",
+       "2  2 FAST 2 FURIOUS    6/6/2003  158745200  94881400  47201120     5.0  1073   \n",
+       "3          21 GRAMS  11/21/2003   20337672  24968790  12344444     7.9   193   \n",
+       "4     28 DAYS LATER   6/27/2003   56260816   9987516  13260048     7.6   521   \n",
+       "\n",
+       "  sequel        avg_rev  ln_budget  \n",
+       "0  NoSeq   56582.912937  17.621228  \n",
+       "1  NoSeq   40328.023033  17.752282  \n",
+       "2    Seq  147945.200373  18.368138  \n",
+       "3  NoSeq  105376.538860  17.033137  \n",
+       "4  NoSeq  107986.211132  16.116846  "
+      ]
+     },
+     "execution_count": 43,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['ln_budget'] = np.log(df.budget)\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (5) Rename variable"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex12) Rename variable 'title' to 'movie_title' and 'ad' to 'media_ad' in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>movie_title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>media_ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>avg_rev</th>\n",
+       "      <th>ln_budget</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>13 GOING ON 30</td>\n",
+       "      <td>4/23/2004</td>\n",
+       "      <td>69540400</td>\n",
+       "      <td>44957472</td>\n",
+       "      <td>36712516</td>\n",
+       "      <td>6.1</td>\n",
+       "      <td>1229</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>56582.912937</td>\n",
+       "      <td>17.621228</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>16 BLOCKS</td>\n",
+       "      <td>3/3/2006</td>\n",
+       "      <td>42021800</td>\n",
+       "      <td>51252848</td>\n",
+       "      <td>30141800</td>\n",
+       "      <td>6.7</td>\n",
+       "      <td>1042</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>40328.023033</td>\n",
+       "      <td>17.752282</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2 FAST 2 FURIOUS</td>\n",
+       "      <td>6/6/2003</td>\n",
+       "      <td>158745200</td>\n",
+       "      <td>94881400</td>\n",
+       "      <td>47201120</td>\n",
+       "      <td>5.0</td>\n",
+       "      <td>1073</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>147945.200373</td>\n",
+       "      <td>18.368138</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>21 GRAMS</td>\n",
+       "      <td>11/21/2003</td>\n",
+       "      <td>20337672</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>12344444</td>\n",
+       "      <td>7.9</td>\n",
+       "      <td>193</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>105376.538860</td>\n",
+       "      <td>17.033137</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28 DAYS LATER</td>\n",
+       "      <td>6/27/2003</td>\n",
+       "      <td>56260816</td>\n",
+       "      <td>9987516</td>\n",
+       "      <td>13260048</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>521</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>107986.211132</td>\n",
+       "      <td>16.116846</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "        movie_title        open        rev    budget  media_ad  rating  scrn  \\\n",
+       "0    13 GOING ON 30   4/23/2004   69540400  44957472  36712516     6.1  1229   \n",
+       "1         16 BLOCKS    3/3/2006   42021800  51252848  30141800     6.7  1042   \n",
+       "2  2 FAST 2 FURIOUS    6/6/2003  158745200  94881400  47201120     5.0  1073   \n",
+       "3          21 GRAMS  11/21/2003   20337672  24968790  12344444     7.9   193   \n",
+       "4     28 DAYS LATER   6/27/2003   56260816   9987516  13260048     7.6   521   \n",
+       "\n",
+       "  sequel        avg_rev  ln_budget  \n",
+       "0  NoSeq   56582.912937  17.621228  \n",
+       "1  NoSeq   40328.023033  17.752282  \n",
+       "2    Seq  147945.200373  18.368138  \n",
+       "3  NoSeq  105376.538860  17.033137  \n",
+       "4  NoSeq  107986.211132  16.116846  "
+      ]
+     },
+     "execution_count": 44,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df = df.rename(columns={'title':'movie_title', 'ad':'media_ad'})\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (6) Replace missing value"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex13) Check if there are missing values for 'media_ad' in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>movie_title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>media_ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>avg_rev</th>\n",
+       "      <th>ln_budget</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "Empty DataFrame\n",
+       "Columns: [movie_title, open, rev, budget, media_ad, rating, scrn, sequel, avg_rev, ln_budget]\n",
+       "Index: []"
+      ]
+     },
+     "execution_count": 45,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[df['media_ad'].isna()]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (7) Replace values in a variable"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex13) The correct name for \"PIRATES OF THE CARIBBEAN DEAD MANS CHEST\" which is an observation for the variable 'movie_name' is \"PIRATES OF THE CARIBBEAN: DEAD MAN'S CHEST\". Correct it in \"df1.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df['movie_title'] = df.movie_title.replace('''PIRATES OF THE CARIBBEAN DEAD MANS CHEST', 'PIRATES OF THE CARIBBEAN: DEAD MAN'S CHEST''')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (8) Change variable case"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex14) Change all the letters in 'movie_title' into lower-case letters in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>movie_title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>media_ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>avg_rev</th>\n",
+       "      <th>ln_budget</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>13 going on 30</td>\n",
+       "      <td>4/23/2004</td>\n",
+       "      <td>69540400</td>\n",
+       "      <td>44957472</td>\n",
+       "      <td>36712516</td>\n",
+       "      <td>6.1</td>\n",
+       "      <td>1229</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>56582.912937</td>\n",
+       "      <td>17.621228</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>16 blocks</td>\n",
+       "      <td>3/3/2006</td>\n",
+       "      <td>42021800</td>\n",
+       "      <td>51252848</td>\n",
+       "      <td>30141800</td>\n",
+       "      <td>6.7</td>\n",
+       "      <td>1042</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>40328.023033</td>\n",
+       "      <td>17.752282</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2 fast 2 furious</td>\n",
+       "      <td>6/6/2003</td>\n",
+       "      <td>158745200</td>\n",
+       "      <td>94881400</td>\n",
+       "      <td>47201120</td>\n",
+       "      <td>5.0</td>\n",
+       "      <td>1073</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>147945.200373</td>\n",
+       "      <td>18.368138</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>21 grams</td>\n",
+       "      <td>11/21/2003</td>\n",
+       "      <td>20337672</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>12344444</td>\n",
+       "      <td>7.9</td>\n",
+       "      <td>193</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>105376.538860</td>\n",
+       "      <td>17.033137</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28 days later</td>\n",
+       "      <td>6/27/2003</td>\n",
+       "      <td>56260816</td>\n",
+       "      <td>9987516</td>\n",
+       "      <td>13260048</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>521</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>107986.211132</td>\n",
+       "      <td>16.116846</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "        movie_title        open        rev    budget  media_ad  rating  scrn  \\\n",
+       "0    13 going on 30   4/23/2004   69540400  44957472  36712516     6.1  1229   \n",
+       "1         16 blocks    3/3/2006   42021800  51252848  30141800     6.7  1042   \n",
+       "2  2 fast 2 furious    6/6/2003  158745200  94881400  47201120     5.0  1073   \n",
+       "3          21 grams  11/21/2003   20337672  24968790  12344444     7.9   193   \n",
+       "4     28 days later   6/27/2003   56260816   9987516  13260048     7.6   521   \n",
+       "\n",
+       "  sequel        avg_rev  ln_budget  \n",
+       "0  NoSeq   56582.912937  17.621228  \n",
+       "1  NoSeq   40328.023033  17.752282  \n",
+       "2    Seq  147945.200373  18.368138  \n",
+       "3  NoSeq  105376.538860  17.033137  \n",
+       "4  NoSeq  107986.211132  16.116846  "
+      ]
+     },
+     "execution_count": 47,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['movie_title']=df.movie_title.apply(str.lower)\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (9) Sort data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex15) Convert the variable 'open' from object format to datetime format in \"df.\" (Hint: do google search or refer to chatgpt and learn how to convert the object format to datetime format using \"pandas\")_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>movie_title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>media_ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>avg_rev</th>\n",
+       "      <th>ln_budget</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>13 going on 30</td>\n",
+       "      <td>2004-04-23</td>\n",
+       "      <td>69540400</td>\n",
+       "      <td>44957472</td>\n",
+       "      <td>36712516</td>\n",
+       "      <td>6.1</td>\n",
+       "      <td>1229</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>56582.912937</td>\n",
+       "      <td>17.621228</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>16 blocks</td>\n",
+       "      <td>2006-03-03</td>\n",
+       "      <td>42021800</td>\n",
+       "      <td>51252848</td>\n",
+       "      <td>30141800</td>\n",
+       "      <td>6.7</td>\n",
+       "      <td>1042</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>40328.023033</td>\n",
+       "      <td>17.752282</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2 fast 2 furious</td>\n",
+       "      <td>2003-06-06</td>\n",
+       "      <td>158745200</td>\n",
+       "      <td>94881400</td>\n",
+       "      <td>47201120</td>\n",
+       "      <td>5.0</td>\n",
+       "      <td>1073</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>147945.200373</td>\n",
+       "      <td>18.368138</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>21 grams</td>\n",
+       "      <td>2003-11-21</td>\n",
+       "      <td>20337672</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>12344444</td>\n",
+       "      <td>7.9</td>\n",
+       "      <td>193</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>105376.538860</td>\n",
+       "      <td>17.033137</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28 days later</td>\n",
+       "      <td>2003-06-27</td>\n",
+       "      <td>56260816</td>\n",
+       "      <td>9987516</td>\n",
+       "      <td>13260048</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>521</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>107986.211132</td>\n",
+       "      <td>16.116846</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "        movie_title       open        rev    budget  media_ad  rating  scrn  \\\n",
+       "0    13 going on 30 2004-04-23   69540400  44957472  36712516     6.1  1229   \n",
+       "1         16 blocks 2006-03-03   42021800  51252848  30141800     6.7  1042   \n",
+       "2  2 fast 2 furious 2003-06-06  158745200  94881400  47201120     5.0  1073   \n",
+       "3          21 grams 2003-11-21   20337672  24968790  12344444     7.9   193   \n",
+       "4     28 days later 2003-06-27   56260816   9987516  13260048     7.6   521   \n",
+       "\n",
+       "  sequel        avg_rev  ln_budget  \n",
+       "0  NoSeq   56582.912937  17.621228  \n",
+       "1  NoSeq   40328.023033  17.752282  \n",
+       "2    Seq  147945.200373  18.368138  \n",
+       "3  NoSeq  105376.538860  17.033137  \n",
+       "4  NoSeq  107986.211132  16.116846  "
+      ]
+     },
+     "execution_count": 48,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['open'] = pd.to_datetime(df['open'])\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex16) Check if the variable 'open' was coverted well into the datetime format using .info() statement._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<class 'pandas.core.frame.DataFrame'>\n",
+      "RangeIndex: 561 entries, 0 to 560\n",
+      "Data columns (total 10 columns):\n",
+      " #   Column       Non-Null Count  Dtype         \n",
+      "---  ------       --------------  -----         \n",
+      " 0   movie_title  561 non-null    object        \n",
+      " 1   open         561 non-null    datetime64[ns]\n",
+      " 2   rev          561 non-null    int64         \n",
+      " 3   budget       561 non-null    int64         \n",
+      " 4   media_ad     561 non-null    int64         \n",
+      " 5   rating       561 non-null    float64       \n",
+      " 6   scrn         561 non-null    int64         \n",
+      " 7   sequel       561 non-null    object        \n",
+      " 8   avg_rev      561 non-null    float64       \n",
+      " 9   ln_budget    561 non-null    float64       \n",
+      "dtypes: datetime64[ns](1), float64(3), int64(4), object(2)\n",
+      "memory usage: 44.0+ KB\n"
+     ]
+    }
+   ],
+   "source": [
+    "df.info()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex17) Sort the data (1) in an ascending order based on the movie opening date (i.e., the 'open' variable) first and then (2) sort it in an descendign order based on revenue (i.e., the 'rev' variable) in \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>movie_title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>media_ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>avg_rev</th>\n",
+       "      <th>ln_budget</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>286</th>\n",
+       "      <td>just married</td>\n",
+       "      <td>2003-01-10</td>\n",
+       "      <td>70071360</td>\n",
+       "      <td>22471910</td>\n",
+       "      <td>30082768</td>\n",
+       "      <td>5.1</td>\n",
+       "      <td>838</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>83617.374702</td>\n",
+       "      <td>16.927777</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>102</th>\n",
+       "      <td>city of god</td>\n",
+       "      <td>2003-01-17</td>\n",
+       "      <td>9443769</td>\n",
+       "      <td>10611735</td>\n",
+       "      <td>4513671</td>\n",
+       "      <td>8.7</td>\n",
+       "      <td>27</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>349769.222222</td>\n",
+       "      <td>16.177471</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>a guy thing</td>\n",
+       "      <td>2003-01-17</td>\n",
+       "      <td>19407530</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>15300874</td>\n",
+       "      <td>5.5</td>\n",
+       "      <td>682</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>28456.788856</td>\n",
+       "      <td>17.033137</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>288</th>\n",
+       "      <td>kangaroo jack</td>\n",
+       "      <td>2003-01-17</td>\n",
+       "      <td>83564248</td>\n",
+       "      <td>74906368</td>\n",
+       "      <td>32790262</td>\n",
+       "      <td>5.1</td>\n",
+       "      <td>993</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>84153.321249</td>\n",
+       "      <td>18.131749</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>131</th>\n",
+       "      <td>darkness falls</td>\n",
+       "      <td>2003-01-24</td>\n",
+       "      <td>40638448</td>\n",
+       "      <td>13732834</td>\n",
+       "      <td>15654057</td>\n",
+       "      <td>4.6</td>\n",
+       "      <td>757</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>53683.550859</td>\n",
+       "      <td>16.435300</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "        movie_title       open       rev    budget  media_ad  rating  scrn  \\\n",
+       "286    just married 2003-01-10  70071360  22471910  30082768     5.1   838   \n",
+       "102     city of god 2003-01-17   9443769  10611735   4513671     8.7    27   \n",
+       "8       a guy thing 2003-01-17  19407530  24968790  15300874     5.5   682   \n",
+       "288   kangaroo jack 2003-01-17  83564248  74906368  32790262     5.1   993   \n",
+       "131  darkness falls 2003-01-24  40638448  13732834  15654057     4.6   757   \n",
+       "\n",
+       "    sequel        avg_rev  ln_budget  \n",
+       "286  NoSeq   83617.374702  16.927777  \n",
+       "102  NoSeq  349769.222222  16.177471  \n",
+       "8    NoSeq   28456.788856  17.033137  \n",
+       "288  NoSeq   84153.321249  18.131749  \n",
+       "131  NoSeq   53683.550859  16.435300  "
+      ]
+     },
+     "execution_count": 52,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.sort_values(by=['open'], ascending=True, inplace=True)\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>movie_title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>media_ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>avg_rev</th>\n",
+       "      <th>ln_budget</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>452</th>\n",
+       "      <td>shrek 2</td>\n",
+       "      <td>2004-05-19</td>\n",
+       "      <td>536119392</td>\n",
+       "      <td>182260032</td>\n",
+       "      <td>51321764</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>2133</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>251345.237693</td>\n",
+       "      <td>19.020945</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>396</th>\n",
+       "      <td>pirates of the caribbean dead mans chest</td>\n",
+       "      <td>2006-07-07</td>\n",
+       "      <td>482136448</td>\n",
+       "      <td>256264240</td>\n",
+       "      <td>45279396</td>\n",
+       "      <td>7.3</td>\n",
+       "      <td>1563</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>308468.616763</td>\n",
+       "      <td>19.361720</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>320</th>\n",
+       "      <td>lord of the rings the return of the king</td>\n",
+       "      <td>2003-12-17</td>\n",
+       "      <td>470695776</td>\n",
+       "      <td>117353312</td>\n",
+       "      <td>74705128</td>\n",
+       "      <td>8.8</td>\n",
+       "      <td>1476</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>318899.577236</td>\n",
+       "      <td>18.580700</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>467</th>\n",
+       "      <td>spider man 2</td>\n",
+       "      <td>2004-06-30</td>\n",
+       "      <td>453931744</td>\n",
+       "      <td>243013360</td>\n",
+       "      <td>53438144</td>\n",
+       "      <td>7.8</td>\n",
+       "      <td>1468</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>309217.809264</td>\n",
+       "      <td>19.308627</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>387</th>\n",
+       "      <td>passion of the christ</td>\n",
+       "      <td>2004-02-25</td>\n",
+       "      <td>449908384</td>\n",
+       "      <td>36452004</td>\n",
+       "      <td>37251644</td>\n",
+       "      <td>7.2</td>\n",
+       "      <td>1565</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>287481.395527</td>\n",
+       "      <td>17.411507</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                  movie_title       open        rev  \\\n",
+       "452                                   shrek 2 2004-05-19  536119392   \n",
+       "396  pirates of the caribbean dead mans chest 2006-07-07  482136448   \n",
+       "320  lord of the rings the return of the king 2003-12-17  470695776   \n",
+       "467                              spider man 2 2004-06-30  453931744   \n",
+       "387                     passion of the christ 2004-02-25  449908384   \n",
+       "\n",
+       "        budget  media_ad  rating  scrn sequel        avg_rev  ln_budget  \n",
+       "452  182260032  51321764     7.6  2133    Seq  251345.237693  19.020945  \n",
+       "396  256264240  45279396     7.3  1563    Seq  308468.616763  19.361720  \n",
+       "320  117353312  74705128     8.8  1476    Seq  318899.577236  18.580700  \n",
+       "467  243013360  53438144     7.8  1468    Seq  309217.809264  19.308627  \n",
+       "387   36452004  37251644     7.2  1565  NoSeq  287481.395527  17.411507  "
+      ]
+     },
+     "execution_count": 54,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.sort_values(by=['rev'], ascending=False, inplace=True)\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (10) Delete variables (columns)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex18) Delete the variable 'ln_budget'._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>movie_title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>media_ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>avg_rev</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>452</th>\n",
+       "      <td>shrek 2</td>\n",
+       "      <td>2004-05-19</td>\n",
+       "      <td>536119392</td>\n",
+       "      <td>182260032</td>\n",
+       "      <td>51321764</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>2133</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>251345.237693</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>396</th>\n",
+       "      <td>pirates of the caribbean dead mans chest</td>\n",
+       "      <td>2006-07-07</td>\n",
+       "      <td>482136448</td>\n",
+       "      <td>256264240</td>\n",
+       "      <td>45279396</td>\n",
+       "      <td>7.3</td>\n",
+       "      <td>1563</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>308468.616763</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>320</th>\n",
+       "      <td>lord of the rings the return of the king</td>\n",
+       "      <td>2003-12-17</td>\n",
+       "      <td>470695776</td>\n",
+       "      <td>117353312</td>\n",
+       "      <td>74705128</td>\n",
+       "      <td>8.8</td>\n",
+       "      <td>1476</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>318899.577236</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>467</th>\n",
+       "      <td>spider man 2</td>\n",
+       "      <td>2004-06-30</td>\n",
+       "      <td>453931744</td>\n",
+       "      <td>243013360</td>\n",
+       "      <td>53438144</td>\n",
+       "      <td>7.8</td>\n",
+       "      <td>1468</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>309217.809264</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>387</th>\n",
+       "      <td>passion of the christ</td>\n",
+       "      <td>2004-02-25</td>\n",
+       "      <td>449908384</td>\n",
+       "      <td>36452004</td>\n",
+       "      <td>37251644</td>\n",
+       "      <td>7.2</td>\n",
+       "      <td>1565</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>287481.395527</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                  movie_title       open        rev  \\\n",
+       "452                                   shrek 2 2004-05-19  536119392   \n",
+       "396  pirates of the caribbean dead mans chest 2006-07-07  482136448   \n",
+       "320  lord of the rings the return of the king 2003-12-17  470695776   \n",
+       "467                              spider man 2 2004-06-30  453931744   \n",
+       "387                     passion of the christ 2004-02-25  449908384   \n",
+       "\n",
+       "        budget  media_ad  rating  scrn sequel        avg_rev  \n",
+       "452  182260032  51321764     7.6  2133    Seq  251345.237693  \n",
+       "396  256264240  45279396     7.3  1563    Seq  308468.616763  \n",
+       "320  117353312  74705128     8.8  1476    Seq  318899.577236  \n",
+       "467  243013360  53438144     7.8  1468    Seq  309217.809264  \n",
+       "387   36452004  37251644     7.2  1565  NoSeq  287481.395527  "
+      ]
+     },
+     "execution_count": 55,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "del df['ln_budget']\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (11) Keep variables (columns)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex19) Select only three variables - 'movie_title', 'rating', and 'scrn', and create a new dataframe only with the three variables and name it as \"df1.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>movie_title</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>452</th>\n",
+       "      <td>shrek 2</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>2133</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>396</th>\n",
+       "      <td>pirates of the caribbean dead mans chest</td>\n",
+       "      <td>7.3</td>\n",
+       "      <td>1563</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>320</th>\n",
+       "      <td>lord of the rings the return of the king</td>\n",
+       "      <td>8.8</td>\n",
+       "      <td>1476</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>467</th>\n",
+       "      <td>spider man 2</td>\n",
+       "      <td>7.8</td>\n",
+       "      <td>1468</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>387</th>\n",
+       "      <td>passion of the christ</td>\n",
+       "      <td>7.2</td>\n",
+       "      <td>1565</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                  movie_title  rating  scrn\n",
+       "452                                   shrek 2     7.6  2133\n",
+       "396  pirates of the caribbean dead mans chest     7.3  1563\n",
+       "320  lord of the rings the return of the king     8.8  1476\n",
+       "467                              spider man 2     7.8  1468\n",
+       "387                     passion of the christ     7.2  1565"
+      ]
+     },
+     "execution_count": 56,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df1 = df[['movie_title', 'rating', 'scrn']]\n",
+    "df1.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## II. Displaying summary statistics and correlations"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (1) Display number of observations"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex20) Display the number of the observations whose rating is 8 or higher in \"df1.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "27"
+      ]
+     },
+     "execution_count": 57,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "len(df1[df1.rating>=8])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (2) Descriptive statistics"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex20) Import the original data 'Movie.csv' again and name it as \"df.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 58,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = pd.read_csv('Movie.csv')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex21) Convert the variable 'open' from object format to datetime format in \"df.\" (Hint: do google search or refer to chatgpt and learn how to convert the object format to datetime format using \"pandas\")_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 59,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>13 GOING ON 30</td>\n",
+       "      <td>2004-04-23</td>\n",
+       "      <td>69540400</td>\n",
+       "      <td>44957472</td>\n",
+       "      <td>36712516</td>\n",
+       "      <td>6.1</td>\n",
+       "      <td>1229</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>16 BLOCKS</td>\n",
+       "      <td>2006-03-03</td>\n",
+       "      <td>42021800</td>\n",
+       "      <td>51252848</td>\n",
+       "      <td>30141800</td>\n",
+       "      <td>6.7</td>\n",
+       "      <td>1042</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2 FAST 2 FURIOUS</td>\n",
+       "      <td>2003-06-06</td>\n",
+       "      <td>158745200</td>\n",
+       "      <td>94881400</td>\n",
+       "      <td>47201120</td>\n",
+       "      <td>5.0</td>\n",
+       "      <td>1073</td>\n",
+       "      <td>Seq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>21 GRAMS</td>\n",
+       "      <td>2003-11-21</td>\n",
+       "      <td>20337672</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>12344444</td>\n",
+       "      <td>7.9</td>\n",
+       "      <td>193</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28 DAYS LATER</td>\n",
+       "      <td>2003-06-27</td>\n",
+       "      <td>56260816</td>\n",
+       "      <td>9987516</td>\n",
+       "      <td>13260048</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>521</td>\n",
+       "      <td>NoSeq</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "              title       open        rev    budget        ad  rating  scrn  \\\n",
+       "0    13 GOING ON 30 2004-04-23   69540400  44957472  36712516     6.1  1229   \n",
+       "1         16 BLOCKS 2006-03-03   42021800  51252848  30141800     6.7  1042   \n",
+       "2  2 FAST 2 FURIOUS 2003-06-06  158745200  94881400  47201120     5.0  1073   \n",
+       "3          21 GRAMS 2003-11-21   20337672  24968790  12344444     7.9   193   \n",
+       "4     28 DAYS LATER 2003-06-27   56260816   9987516  13260048     7.6   521   \n",
+       "\n",
+       "  sequel  \n",
+       "0  NoSeq  \n",
+       "1  NoSeq  \n",
+       "2    Seq  \n",
+       "3  NoSeq  \n",
+       "4  NoSeq  "
+      ]
+     },
+     "execution_count": 59,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['open']= pd.to_datetime(df['open'])\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex22) Create a new variable 'year' which indicates the year when each movie is released. That is, 'year' includes only the year part of 'open' variable. (Hint: do google search or refer to chatgpt and learn how to get only year from a variable with the datetime format.)_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 65,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>title</th>\n",
+       "      <th>open</th>\n",
+       "      <th>rev</th>\n",
+       "      <th>budget</th>\n",
+       "      <th>ad</th>\n",
+       "      <th>rating</th>\n",
+       "      <th>scrn</th>\n",
+       "      <th>sequel</th>\n",
+       "      <th>year</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>13 GOING ON 30</td>\n",
+       "      <td>2004-04-23</td>\n",
+       "      <td>69540400</td>\n",
+       "      <td>44957472</td>\n",
+       "      <td>36712516</td>\n",
+       "      <td>6.1</td>\n",
+       "      <td>1229</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>2004</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>16 BLOCKS</td>\n",
+       "      <td>2006-03-03</td>\n",
+       "      <td>42021800</td>\n",
+       "      <td>51252848</td>\n",
+       "      <td>30141800</td>\n",
+       "      <td>6.7</td>\n",
+       "      <td>1042</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>2006</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2 FAST 2 FURIOUS</td>\n",
+       "      <td>2003-06-06</td>\n",
+       "      <td>158745200</td>\n",
+       "      <td>94881400</td>\n",
+       "      <td>47201120</td>\n",
+       "      <td>5.0</td>\n",
+       "      <td>1073</td>\n",
+       "      <td>Seq</td>\n",
+       "      <td>2003</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>21 GRAMS</td>\n",
+       "      <td>2003-11-21</td>\n",
+       "      <td>20337672</td>\n",
+       "      <td>24968790</td>\n",
+       "      <td>12344444</td>\n",
+       "      <td>7.9</td>\n",
+       "      <td>193</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>2003</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>28 DAYS LATER</td>\n",
+       "      <td>2003-06-27</td>\n",
+       "      <td>56260816</td>\n",
+       "      <td>9987516</td>\n",
+       "      <td>13260048</td>\n",
+       "      <td>7.6</td>\n",
+       "      <td>521</td>\n",
+       "      <td>NoSeq</td>\n",
+       "      <td>2003</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "              title       open        rev    budget        ad  rating  scrn  \\\n",
+       "0    13 GOING ON 30 2004-04-23   69540400  44957472  36712516     6.1  1229   \n",
+       "1         16 BLOCKS 2006-03-03   42021800  51252848  30141800     6.7  1042   \n",
+       "2  2 FAST 2 FURIOUS 2003-06-06  158745200  94881400  47201120     5.0  1073   \n",
+       "3          21 GRAMS 2003-11-21   20337672  24968790  12344444     7.9   193   \n",
+       "4     28 DAYS LATER 2003-06-27   56260816   9987516  13260048     7.6   521   \n",
+       "\n",
+       "  sequel  year  \n",
+       "0  NoSeq  2004  \n",
+       "1  NoSeq  2006  \n",
+       "2    Seq  2003  \n",
+       "3  NoSeq  2003  \n",
+       "4  NoSeq  2003  "
+      ]
+     },
+     "execution_count": 65,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import datetime as dt\n",
+    "\n",
+    "df['year']=df['open'].dt.strftime('%Y')\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (3) Summarize one variable"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex21) Calculate and display the means of 'rating' each year in \"df\" (Hint: do google search or refer to chatgpt and learn how to group the data by year and calculate summary statistics for each year.)_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 66,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "year\n",
+       "2003    6.193284\n",
+       "2004    6.095205\n",
+       "2005    6.250365\n",
+       "2006    6.244444\n",
+       "Name: rating, dtype: float64"
+      ]
+     },
+     "execution_count": 66,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.groupby('year').rating.mean( )"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### (4) Correlations"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex22) Create a correlation matrix among the variables 'rating', 'rev', 'ad', and 'scrn' in \"df\", and name the correlation matrix as \"corr.\"_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 69,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "corr = df[['rating', 'rev', 'ad', 'scrn']].corr()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### <font color='red'> _(Ex23) Display the correlation matrix (i.e., corr) but limit the number of decimals to 3._"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 70,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "        rating    rev     ad   scrn\n",
+      "rating   1.000  0.270  0.219 -0.124\n",
+      "rev      0.270  1.000  0.671  0.419\n",
+      "ad       0.219  0.671  1.000  0.460\n",
+      "scrn    -0.124  0.419  0.460  1.000\n"
+     ]
+    }
+   ],
+   "source": [
+    "corr = corr.round(3)\n",
+    "print(corr)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.3"
+  },
+  "toc": {
+   "base_numbering": 1,
+   "nav_menu": {},
+   "number_sections": true,
+   "sideBar": true,
+   "skip_h1_title": false,
+   "title_cell": "Table of Contents",
+   "title_sidebar": "Contents",
+   "toc_cell": false,
+   "toc_position": {},
+   "toc_section_display": true,
+   "toc_window_display": false
+  },
+  "varInspector": {
+   "cols": {
+    "lenName": 16,
+    "lenType": 16,
+    "lenVar": 40
+   },
+   "kernels_config": {
+    "python": {
+     "delete_cmd_postfix": "",
+     "delete_cmd_prefix": "del ",
+     "library": "var_list.py",
+     "varRefreshCmd": "print(var_dic_list())"
+    },
+    "r": {
+     "delete_cmd_postfix": ") ",
+     "delete_cmd_prefix": "rm(",
+     "library": "var_list.r",
+     "varRefreshCmd": "cat(var_dic_list()) "
+    }
+   },
+   "types_to_exclude": [
+    "module",
+    "function",
+    "builtin_function_or_method",
+    "instance",
+    "_Feature"
+   ],
+   "window_display": false
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
